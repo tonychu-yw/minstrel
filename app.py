@@ -1,10 +1,8 @@
-import os
 import streamlit as st
 from llama_index.core import VectorStoreIndex, ServiceContext, SimpleDirectoryReader
 from llama_index.llms.gemini import Gemini
 
 
-os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
 st.header("Chat - RAG POC")
 
 
@@ -20,7 +18,7 @@ def load_data():
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
         service_context = ServiceContext.from_defaults(
-            llm=Gemini(model="gemini-2.0-flash-exp", 
+            llm=Gemini(model="models/gemini-2.0-flash-exp", 
                        temperature=0.5, 
                        system_prompt="你是一個 FF14 TRPG 的 dungeon master。請依照提供的說明書規則回覆最合適的結果。"))
         index = VectorStoreIndex.from_documents(docs, service_context=service_context)
