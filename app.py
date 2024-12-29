@@ -1,6 +1,6 @@
 import streamlit as st
-from llama_index import VectorStoreIndex, ServiceContext, Document
-from llama_index.llms import Gemini
+from llama_index.core import VectorStoreIndex, ServiceContext
+from llama_index.llms.gemini import Gemini
 from llama_index import SimpleDirectoryReader
 
 
