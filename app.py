@@ -1,9 +1,10 @@
+import os
 import streamlit as st
 from llama_index.core import VectorStoreIndex, ServiceContext, SimpleDirectoryReader
 from llama_index.llms.gemini import Gemini
 
 
-GOOGLE_API_KEY = st.secrets.GOOGLE_API_KEY
+os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
 st.header("Chat - RAG POC")
 
 
