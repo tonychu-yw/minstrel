@@ -1,7 +1,6 @@
 import streamlit as st
-from llama_index.core import VectorStoreIndex, ServiceContext
+from llama_index.core import VectorStoreIndex, ServiceContext, SimpleDirectoryReader
 from llama_index.llms.gemini import Gemini
-from llama_index import SimpleDirectoryReader
 
 
 GOOGLE_API_KEY = st.secrets.GOOGLE_API_KEY
