@@ -5,7 +5,7 @@ from llama_index.llms.openai import OpenAI
 
 
 st.header("Chat - RAG POC")
-openai.api_key = st.secrets.openai_key
+
 
 if "messages" not in st.session_state.keys(): # Initialize the chat message history
     st.session_state.messages = [
