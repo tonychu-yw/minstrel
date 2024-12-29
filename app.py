@@ -1,5 +1,5 @@
 import streamlit as st
-from llama_index.core import VectorStoreIndex, ServiceContext, SimpleDirectoryReader
+from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
 from llama_index.llms.gemini import Gemini
 
 
@@ -17,11 +17,11 @@ def load_data():
     with st.spinner(text="Loading and indexing the Streamlit docs – hang tight! This should take 1-2 minutes."):
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
-        service_context = ServiceContext.from_defaults(
-            llm=Gemini(model="models/gemini-2.0-flash-exp", 
-                       temperature=0.5, 
-                       system_prompt="你是一個 FF14 TRPG 的 dungeon master。請依照提供的說明書規則回覆最合適的結果。"))
-        index = VectorStoreIndex.from_documents(docs, service_context=service_context)
+        Settings.llm = Gemini(
+            model="models/gemini-2.0-flash-exp", 
+            temperature=0.5, 
+            system_prompt="你是一個 FF14 TRPG 的 dungeon master。請依照提供的說明書規則回覆最合適的結果。")
+        index = VectorStoreIndex.from_documents(docs)
         return index
 
 index = load_data()
