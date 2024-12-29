@@ -19,7 +19,7 @@ def load_data():
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
         Settings.llm = OpenAI(
-            model="models/gemini-2.0-flash-exp", 
+            model="gpt-4o-mini", 
             temperature=0.5, 
             system_prompt="你是一個 FF14 TRPG 的 dungeon master。請依照提供的說明書規則回覆最合適的結果。")
         index = VectorStoreIndex.from_documents(docs)
