@@ -1,10 +1,11 @@
 import streamlit as st
+import openai
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, Settings
-from llama_index.llms.gemini import Gemini
+from llama_index.llms.openai import OpenAI
 
 
 st.header("Chat - RAG POC")
-
+openai.api_key = st.secrets.openai_key
 
 if "messages" not in st.session_state.keys(): # Initialize the chat message history
     st.session_state.messages = [
@@ -17,7 +18,7 @@ def load_data():
     with st.spinner(text="Loading and indexing the Streamlit docs – hang tight! This should take 1-2 minutes."):
         reader = SimpleDirectoryReader(input_dir="./data", recursive=True)
         docs = reader.load_data()
-        Settings.llm = Gemini(
+        Settings.llm = OpenAI(
             model="models/gemini-2.0-flash-exp", 
             temperature=0.5, 
             system_prompt="你是一個 FF14 TRPG 的 dungeon master。請依照提供的說明書規則回覆最合適的結果。")
